@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoStake - Registration & Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="https://placehold.co/40x40" alt="CryptoStake logo featuring a blue shield with dollar sign inside" class="rounded-full">
+                <span class="text-xl font-bold">CryptoStake</span>
+            </div>
+            <div id="nav-links" class="hidden md:flex items-center space-x-6">
+                <a href="#" class="hover:text-blue-200 transition">Home</a>
+                <a href="#" class="hover:text-blue-200 transition">About</a>
+                <a href="#" class="hover:text-blue-200 transition">Contact</a>
+                <button id="auth-btn" class="bg-white text-blue-600 px-4 py-2 rounded-md font-medium hover:bg-blue-50 transition">Sign In</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <section id="auth-section" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 mb-8">
+            <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Create Your Account</h1>
+            
+            <div id="registration-form">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    <input type="text" id="username" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your username">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                    <input type="email" id="email" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your email">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="password" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Create a password">
+                </div>
+                <button id="register-btn" class="w-full gradient-bg text-white py-2 px-4 rounded-md font-medium hover:opacity-90 transition">Register</button>
+                <p class="text-center mt-4 text-gray-600">
+                    Already have an account? <button id="switch-to-login" class="text-blue-600 hover:underline">Sign In</button>
+                </p>
+            </div>
+
+            <div id="login-form" class="hidden">
+                <div class="mb-4">
+                    <label for="login-email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                    <input type="email" id="login-email" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your email">
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="login-password" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Enter your password">
+                </div>
+                <button id="login-btn" class="w-full gradient-bg text-white py-2 px-4 rounded-md font-medium hover:opacity-90 transition">Sign In</button>
+                <p class="text-center mt-4 text-gray-600">
+                    Don't have an account? <button id="switch-to-register" class="text-blue-600 hover:underline">Register</button>
+                </p>
+            </div>
+        </section>
+
+        <section id="dashboard-section" class="hidden">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Stake Your Crypto Assets</h1>
+            
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Make a Deposit</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label for="coin-select" class="block text-gray-700 text-sm font-bold mb-2">Select Coin</label>
+                        <select id="coin-select" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md">
+                            <option value="btc">Bitcoin (BTC)</option>
+                            <option value="eth">Ethereum (ETH)</option>
+                            <option value="sol">Solana (SOL)</option>
+                            <option value="usdt">Tether (USDT)</option>
+                            <option value="usdc">USD Coin (USDC)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="deposit-amount" class="block text-gray-700 text-sm font-bold mb-2">Amount</label>
+                        <input type="number" id="deposit-amount" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="0.00">
+                    </div>
+                </div>
+                
+                <button id="generate-address-btn" class="gradient-bg text-white py-2 px-4 rounded-md font-medium hover:opacity-90 transition">Generate Deposit Address</button>
+                
+                <div id="address-section" class="mt-6 hidden">
+                    <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                        <h3 class="font-bold text-blue-800 mb-2">Your Deposit Address</h3>
+                        <div class="flex items-center">
+                            <input type="text" id="deposit-address" class="form-input flex-1 px-3 py-2 border border-gray-300 rounded-l-md" readonly>
+                            <button id="copy-address-btn" class="bg-blue-600 text-white py-2 px-4 rounded-r-md">Copy</button>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Send the selected amount to this address to complete your deposit.</p>
+                    </div>
+                </div>
+                
+                <button id="check-balance-btn" class="mt-4 gradient-bg text-white py-2 px-4 rounded-md font-medium hover:opacity-90 transition hidden">Check Balance</button>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Your Portfolio</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-indigo-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-indigo-600">Total Balance</p>
+                                <p id="total-balance" class="text-2xl font-bold text-indigo-800">$0.00</p>
+                            </div>
+                            <div class="bg-indigo-100 p-3 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-green-600">Staked</p>
+                                <p id="staked-balance" class="text-2xl font-bold text-green-800">$0.00</p>
+                            </div>
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-purple-600">Available</p>
+                                <p id="available-balance" class="text-2xl font-bold text-purple-800">$0.00</p>
+                            </div>
+                            <div class="bg-purple-100 p-3 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Asset</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Balance</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Value</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Staked</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assets-table-body" class="bg-white divide-y divide-gray-200">
+                            </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-8 portfolio-chart p-4">
+                    <div class="flex items-center justify-center h-full text-gray-400">
+                        Performance chart will be displayed here
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
